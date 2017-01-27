@@ -18,7 +18,7 @@
             fail: function (message) {
             },
             fields: {},
-            urlRequest: 'dist/php/receita-ws.php'
+            urlRequest: '../dist/php/receita-ws.php'
         };
 
         /*
