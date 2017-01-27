@@ -19,9 +19,6 @@ Plugin em jQuery para consulta de dados de pessoa jurídica através do CNPJ uti
                         nome: '#nome',
                         logradouro: '#logradouro',
                         numero: '#numero',
-                        bairro: '#bairro',
-                        municipio: '#municipio',
-                        uf: '#uf'
                     }
                 });
             });
@@ -38,13 +35,83 @@ Plugin em jQuery para consulta de dados de pessoa jurídica através do CNPJ uti
     
     <label for="numero">Numero:</label>
     <input type="text" id="numero" />
-    
-    <label for="bairro">Bairro:</label>
-    <input type="text" id="bairro" />
-    
-    <label for="municipio">Município:</label>
-    <input type="text" id="municipio" /><br>
-    
-    <label for="uf">UF:</label>
-    <input type="text" id="uf" />
 </html>
+```
+
+#### 2. Permite pré tratamento dos dados obtidos do WS ou adaptação para formulários personalizados.
+
+```html
+<html>
+    <head>
+        <script src="jquery.min.js"></script>
+        <script src="jquery.receita-ws.js"></script>
+    </head>
+    <body>
+        <script>
+            $(document).ready(function () {
+                $('#cnpj').receitaws({
+                    fields: {
+                        nome: '#nome',
+                        logradouro: '#logradouro',
+                        numero: '#numero',
+                        cep: function (data) {
+                            var separaCep = data.split('-');
+                            
+                            $('#cep1').val(separaCep[0]);
+                            $('#cep2').val(separaCep[2]);
+                        }
+                    }
+                });
+            });
+        </script>
+    </body>
+    <label for="cnpj">Cnpj:</label>
+    <input type="text" id="cnpj"/>
+    
+    <label for="razao">Nome:</label>
+    <input type="text" id="nome"/>
+        
+    <label for="razao">CEP:</label>
+    <input type="text" id="cep1"/>-<input type="text" id="cep2"/>
+    
+    <label for="logradouro">Logradouro:</label>
+    <input type="text" id="logradouro"/>
+    
+    <label for="numero">Numero:</label>
+    <input type="text" id="numero" />
+</html>
+```
+
+#### 3. Eventos de callback
+
+```javascript
+$('#cnpj').receitaws({
+    fields: {
+        nome: '#nome',
+        logradouro: '#logradouro',
+        numero: '#numero',
+        cep: function (data) {
+            var separaCep = data.split('-');
+            
+            $('#cep1').val(separaCep[0]);
+            $('#cep2').val(separaCep[2]);
+        }
+    },
+    
+    afterRequest: function () {
+        console.log('Iniciando a busca.');
+    },
+    success: function (data) {
+        console.log('CNPJ encontrado.');
+        
+        //Dados obtidos
+        console.log(data);
+    },
+    fail: function (message) {
+        console.log('Falha na requisição, detalhes: ' + message);
+    },
+    notfound: function (message) {
+        console.log('CNPJ não encontrado ou inválido.');
+    }
+});
+```
