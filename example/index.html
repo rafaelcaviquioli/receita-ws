@@ -3,6 +3,8 @@
     <script src="../lib/jquery.min.js"></script>
     <script src="../dist/js/jquery.receita-ws.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Receita WS</title>
 </head>
 <body>
 
@@ -16,9 +18,11 @@
         }
 
         $('#cnpj').receitaws({
-
             afterRequest: function () {
+                var cnpj = $('#cnpj').val();
                 $('#status').html('<div class="alert alert-info">Buscando CNPJ</div>');
+                $('form').find("input[type=text]").val("");
+                $('#cnpj').val(cnpj);
                 $('#cnpj').prop('disabled', true);
             },
             success: function (data) {
@@ -53,9 +57,13 @@
                     }
                 },
                 qsa: function (data) {
-                    if (typeof data[0] != 'undefined') {
-                        $('#responsavel').val(data[0].nome);
-                    }
+                    var responsaveis = [];
+                    $.each(data, function(i, val) {
+                        if (typeof val != 'undefined') {
+                            responsaveis[i] = val.nome
+                        }
+                    });
+                    $('#responsavel').val(responsaveis.join(','));
                 }
             }
         });
@@ -67,7 +75,6 @@
         width: 500px;
         margin: 20px auto;
     }
-
 </style>
 <form>
 
