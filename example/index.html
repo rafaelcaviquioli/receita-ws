@@ -1,7 +1,7 @@
 <html>
 <head>
-    <script src="lib/jquery.min.js"></script>
-    <script src="dist/js/jquery.receita-ws.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+    <script src="../dist/js/jquery.receita-ws.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
@@ -51,9 +51,6 @@
                     if (typeof separa[0] != 'undefined') {
                         $('#fone1').val(separa[0]);
                     }
-                    if (typeof separa[1] != 'undefined') {
-                        $('#fone2').val(separa[1]);
-                    }
                 },
                 qsa: function (data) {
                     if (typeof data[0] != 'undefined') {
@@ -78,19 +75,17 @@
     <div class="panel panel-default" id="form">
 
 
-        <div class="panel-heading">Cadastro de pessoa juridica</div>
+        <div class="panel-heading"><strong>Cadastro de pessoa juridica</strong></div>
         <div class="panel-body">
 
             <div id="status"></div>
 
             <label for="cnpj">Cnpj:</label> <input type="text" id="cnpj" value="" class="form-control input-sn"/>
             <hr>
-            <label for="razao">Razao:</label> <input type="text" id="razao" class="form-control input-sn"/><br>
-            <label for="cnpj">Fantasia:</label> <input type="text" id="fantasia" class="form-control input-sn"/><br>
+            <label for="razao">Razão:</label> <input type="text" id="razao" class="form-control input-sn"/><br>
             <label for="responsavel">Responsavel:</label>
             <input type="text" id="responsavel" class="form-control input-sn"/><br>
             <label for="fone1">Telefone 1:</label> <input type="text" id="fone1" class="form-control input-sn"/><br>
-            <label for="fone2">Telefone 2:</label> <input type="text" id="fone2" class="form-control input-sn"/><br>
             <label for="logradouro">Logradouro:</label> <input type="text" id="logradouro"
                                                                class="form-control input-sn"/><br>
             <label for="numero">Numero:</label> <input type="text" id="numero" class="form-control input-sn"/><br>
